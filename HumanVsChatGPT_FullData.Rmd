@@ -1,0 +1,724 @@
+---
+title: "HumanVsChatGPT_Pilot"
+author: "Lee, Nathan, Kodzai"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r}
+library(magrittr)
+library(dplyr)
+# Load the data from the CSV file
+data <- read.csv("ChatGPT_041523_Numeric.csv", 
+                 header = TRUE, 
+                 stringsAsFactors = FALSE)
+
+```
+
+
+```{r}
+head(data)
+```
+
+```{r}
+names(data)
+
+```
+
+```{r}
+# Drop rows that fail attention check and only get complete responses
+df_cleaned <- data[data$AC1 == 4 & data$AC2 == 4 & data$AC3 == 4 & data$AC4 == 4 & data$AC5 == 4, ]
+```
+
+
+```{r Data Cleaning}
+# Get counts
+nrow(data)
+nrow(df_cleaned)
+```
+```{r}
+t.test(df_cleaned$HT1Credible, df_cleaned$CT1Credible)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT1Credible
+y <- df_cleaned$CT1Credible
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Credibility of Human Tweets and ChatGPT Tweets")
+```
+```{r}
+t.test(df_cleaned$HT1Positive, df_cleaned$CT1Positive)
+```
+
+```{r}
+t.test(df_cleaned$HT1Positive, df_cleaned$CT1Positive)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT1Positive
+y <- df_cleaned$CT1Positive
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Positivity of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT1Quality, df_cleaned$CT1Quality)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT1Quality
+y <- df_cleaned$CT1Quality
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Quality of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT1Creative, df_cleaned$CT1Creative)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT1Creative
+y <- df_cleaned$CT1Creative
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Creativeness of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT1Readable, df_cleaned$CT1Readable)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT1Readable
+y <- df_cleaned$CT1Readable
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Readability of Human Tweets and ChatGPT Tweets")
+```
+
+Question 2: Google
+
+```{r}
+t.test(df_cleaned$HT2Credible, df_cleaned$CT2Credible)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Credible
+y <- df_cleaned$CT2Credible
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Credibility of Human Tweets and ChatGPT Tweets")
+```
+```{r}
+t.test(df_cleaned$HT2Positive, df_cleaned$CT2Positive)
+```
+
+```{r}
+t.test(df_cleaned$HT2Positive, df_cleaned$CT2Positive)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Positive
+y <- df_cleaned$CT2Positive
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Positivity of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT2Quality, df_cleaned$CT2Quality)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Quality
+y <- df_cleaned$CT2Quality
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Quality of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT2Creative, df_cleaned$CT2Creative)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Creative
+y <- df_cleaned$CT2Creative
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Creativeness of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT2Readable, df_cleaned$CT2Readable)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Readable
+y <- df_cleaned$CT2Readable
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Readability of Human Tweets and ChatGPT Tweets")
+```
+Question 3: Nyquil
+
+```{r}
+t.test(df_cleaned$HT3Credible, df_cleaned$CT3Credible)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT3Credible
+y <- df_cleaned$CT3Credible
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Credibility of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT3Positive, df_cleaned$CT3Positive)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT3Positive
+y <- df_cleaned$CT3Positive
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Positivity of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT3Quality, df_cleaned$CT3Quality)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT3Quality
+y <- df_cleaned$CT3Quality
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Quality of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT3Creative, df_cleaned$CT3Creative)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT3Creative
+y <- df_cleaned$CT3Creative
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Creativeness of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT3Readable, df_cleaned$CT3Readable)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT2Readable
+y <- df_cleaned$CT2Readable
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Readability of Human Tweets and ChatGPT Tweets")
+```
+Question 4: Colgate
+
+```{r}
+t.test(df_cleaned$HT4Credible, df_cleaned$CT4Credible)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT4Credible
+y <- df_cleaned$CT4Credible
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Credibility of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT4Positive, df_cleaned$CT4Positive)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT4Positive
+y <- df_cleaned$CT4Positive
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Positivity of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT4Quality, df_cleaned$CT4Quality)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT4Quality
+y <- df_cleaned$CT4Quality
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Quality of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT4Creative, df_cleaned$CT4Creative)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT4Creative
+y <- df_cleaned$CT4Creative
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Creativeness of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT4Readable, df_cleaned$CT4Readable)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT4Readable
+y <- df_cleaned$CT4Readable
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Readability of Human Tweets and ChatGPT Tweets")
+```
+
+Question 5: Chase
+
+```{r}
+t.test(df_cleaned$HT5Credible, df_cleaned$CT5Credible)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT5Credible
+y <- df_cleaned$CT5Credible
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Credibility of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT5Positive, df_cleaned$CT5Positive)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT5Positive
+y <- df_cleaned$CT5Positive
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Positivity of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT5Quality, df_cleaned$CT5Quality)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT5Quality
+y <- df_cleaned$CT5Quality
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Quality of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT5Creative, df_cleaned$CT5Creative)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT5Creative
+y <- df_cleaned$CT5Creative
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Creativeness of Human Tweets and ChatGPT Tweets")
+```
+
+```{r}
+t.test(df_cleaned$HT5Readable, df_cleaned$CT5Readable)
+```
+```{r}
+# create two sample vectors
+x <- df_cleaned$HT5Readable
+y <- df_cleaned$CT5Readable
+
+# Omit blanks
+Human <- na.omit(x)
+ChatGPT <- na.omit(y)
+
+# calculate the means of x and y
+x_mean <- mean(Human)
+y_mean <- mean(ChatGPT)
+
+# create a data frame with the means
+means_df <- data.frame(means = c(x_mean, y_mean), group = c("Human", "ChatGPT"))
+
+# plot the means in a side-by-side bar chart
+library(ggplot2)
+ggplot(means_df, aes(x = group, y = means, fill = group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Mean") +
+  ggtitle("Mean Readability of Human Tweets and ChatGPT Tweets")
+```
